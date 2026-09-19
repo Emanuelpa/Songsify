@@ -1,0 +1,26 @@
+.page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 40px;
+    font-size: 0.9rem;
+    color: var(--text-low);
+}
+
+.back-link:hover {
+    color: var(--text-high);
+    text-decoration: none;
+}
+
+.error {
+    color: var(--danger);
+    font-size: 0.9rem;
+}
+
+.empty-state {
+    color: var(--text-low);
+}

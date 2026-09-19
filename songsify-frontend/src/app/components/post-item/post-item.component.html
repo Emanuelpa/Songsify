@@ -1,0 +1,15 @@
+<div class="track">
+    <a [routerLink]="['/posts', post.id]" class="track-title-link">
+        <h2 class="track-title">{{ post.title }}</h2>
+    </a>
+    <div class="track-meta">
+        <strong>{{ post.songName }}</strong> — {{ post.singerName }}, recomendado por {{ post.author }}
+    </div>
+    <div class="track-date">Publicado el {{ post.creationDate | date:"d 'de' MMMM, y 'a las' HH:mm" }}</div>
+    <p class="track-description">{{ post.description }}</p>
+    <div class="track-actions">
+        <a [href]="post.songUrl" target="_blank">Escuchar</a>
+        <a [routerLink]="['/posts/editar', post.id]">Editar</a>
+        <button (click)="onDeleteClick()">Eliminar</button>
+    </div>
+</div>

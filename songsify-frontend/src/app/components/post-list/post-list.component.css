@@ -1,0 +1,47 @@
+.page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+}
+
+.masthead {
+    margin-bottom: 56px;
+}
+
+.masthead h1 {
+    font-size: 2.75rem;
+    letter-spacing: -0.01em;
+}
+
+.masthead p {
+    color: var(--text-low);
+    margin-top: 8px;
+    font-size: 1.05rem;
+    max-width: 46ch;
+}
+
+.new-post-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: var(--text-high);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: opacity 0.15s ease;
+}
+
+.new-post-link:hover {
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+.error {
+    color: var(--danger);
+    font-size: 0.9rem;
+}
+
+.empty-state {
+    color: var(--text-low);
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+}

@@ -1,0 +1,17 @@
+<div class="page">
+    <div class="masthead">
+        <h1>Songsify</h1>
+        <p>¿Cansado de escuchar siempre lo mismo? Aquí encontrarás lo que otros ya descubrieron antes que tú.</p>
+        <a class="new-post-link" routerLink="/posts/nuevo">Agregar una recomendación</a>
+    </div>
+
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    <p *ngIf="loading" class="empty-state">Cargando recomendaciones...</p>
+
+    <div *ngIf="!loading && posts.length === 0" class="empty-state">
+        Todavía no hay recomendaciones. Sé el primero en agregar una.
+    </div>
+
+    <app-post-item *ngFor="let post of posts" [post]="post" (delete)="onDeletePost($event)">
+    </app-post-item>
+</div>

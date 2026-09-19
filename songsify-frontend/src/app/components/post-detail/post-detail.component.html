@@ -1,0 +1,9 @@
+<div class="page">
+    <a class="back-link" routerLink="/">← Volver a todas las recomendaciones</a>
+
+    <p *ngIf="loadError" class="error">{{ loadError }}</p>
+    <p *ngIf="loading" class="empty-state">Cargando...</p>
+
+    <app-post-item *ngIf="post" [post]="post" (delete)="onDeletePost($event)">
+    </app-post-item>
+</div>

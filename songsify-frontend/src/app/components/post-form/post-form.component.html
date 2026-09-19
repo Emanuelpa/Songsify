@@ -1,0 +1,43 @@
+<div class="page">
+    <h1>{{ isEditMode ? 'Editar recomendación' : 'Nueva recomendación' }}</h1>
+
+    <p *ngIf="loadError" class="error">{{ loadError }}</p>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+    <form *ngIf="!loadError" (ngSubmit)="savePost()">
+        <div class="field">
+            <label>Título de la publicación</label>
+            <input type="text" [(ngModel)]="post.title" name="title" required>
+        </div>
+
+        <div class="field">
+            <label>Autor de la recomendación</label>
+            <input type="text" [(ngModel)]="post.author" name="author" required>
+        </div>
+
+        <div class="field">
+            <label>Nombre de la canción</label>
+            <input type="text" [(ngModel)]="post.songName" name="songName" required>
+        </div>
+
+        <div class="field">
+            <label>Cantante o banda</label>
+            <input type="text" [(ngModel)]="post.singerName" name="singerName" required>
+        </div>
+
+        <div class="field">
+            <label>URL de la canción</label>
+            <input type="text" [(ngModel)]="post.songUrl" name="songUrl" required>
+        </div>
+
+        <div class="field">
+            <label>Descripción</label>
+            <textarea [(ngModel)]="post.description" name="description"></textarea>
+        </div>
+
+        <div class="actions">
+            <button type="submit">Guardar</button>
+            <a routerLink="/">Cancelar</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,41 @@
+:root {
+  --bg: #15130F;
+  --surface: #1E1B16;
+  --border: #3A352C;
+  --text-high: #F2EDE2;
+  --text-low: #9B9284;
+  --accent: #C89B3C;
+  --danger: #B6604A;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-high);
+  font-family: 'Work Sans', sans-serif;
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: 'Work Sans', sans-serif;
+  cursor: pointer;
+}
