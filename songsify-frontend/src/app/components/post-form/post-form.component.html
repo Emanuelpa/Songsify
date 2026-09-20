@@ -4,35 +4,54 @@
     <p *ngIf="loadError" class="error">{{ loadError }}</p>
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <form *ngIf="!loadError" (ngSubmit)="savePost()">
+    <form *ngIf="!loadError" [formGroup]="postForm" (ngSubmit)="savePost()">
         <div class="field">
             <label>Título de la publicación</label>
-            <input type="text" [(ngModel)]="post.title" name="title" required>
+            <input type="text" formControlName="title">
+            <p *ngIf="postForm.controls.title.invalid && postForm.controls.title.touched" class="field-error">
+                El título es obligatorio
+            </p>
         </div>
 
         <div class="field">
-            <label>Autor de la recomendación</label>
-            <input type="text" [(ngModel)]="post.author" name="author" required>
+            <label>¿Cómo quieres que te llamemos?</label>
+            <input type="text" formControlName="author">
+            <p *ngIf="postForm.controls.author.invalid && postForm.controls.author.touched" class="field-error">
+                El autor es obligatorio
+            </p>
         </div>
 
         <div class="field">
             <label>Nombre de la canción</label>
-            <input type="text" [(ngModel)]="post.songName" name="songName" required>
+            <input type="text" formControlName="songName">
+            <p *ngIf="postForm.controls.songName.invalid && postForm.controls.songName.touched" class="field-error">
+                El nombre de la canción es obligatorio
+            </p>
         </div>
 
         <div class="field">
             <label>Cantante o banda</label>
-            <input type="text" [(ngModel)]="post.singerName" name="singerName" required>
+            <input type="text" formControlName="singerName">
+            <p *ngIf="postForm.controls.singerName.invalid && postForm.controls.singerName.touched" class="field-error">
+                El nombre del cantante es obligatorio
+            </p>
         </div>
 
         <div class="field">
             <label>URL de la canción</label>
-            <input type="text" [(ngModel)]="post.songUrl" name="songUrl" required>
+            <input type="text" formControlName="songUrl">
+            <p *ngIf="postForm.controls.songUrl.invalid && postForm.controls.songUrl.touched" class="field-error">
+                La URL de la canción es obligatoria
+            </p>
         </div>
 
         <div class="field">
             <label>Descripción</label>
-            <textarea [(ngModel)]="post.description" name="description"></textarea>
+            <textarea formControlName="description"></textarea>
+            <p *ngIf="postForm.controls.description.invalid && postForm.controls.description.touched"
+                class="field-error">
+                La descripción no puede superar los 1000 caracteres
+            </p>
         </div>
 
         <div class="actions">

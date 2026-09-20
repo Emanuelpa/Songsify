@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.emanuel.songsify.model.Post;
+import com.emanuel.songsify.dto.PostRequest;
+import com.emanuel.songsify.dto.PostResponse;
 import com.emanuel.songsify.service.PostService;
 
 import jakarta.validation.Valid;
@@ -32,26 +33,26 @@ public class PostController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Post>> findAllPosts() {
-        List<Post> posts = postService.findAll();
+    public ResponseEntity<List<PostResponse>> findAllPosts() {
+        List<PostResponse> posts = postService.findAll();
         return ResponseEntity.ok(posts);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Post> findPost(@PathVariable Long id) {
-        Post post = postService.findById(id);
+    public ResponseEntity<PostResponse> findPost(@PathVariable Long id) {
+        PostResponse post = postService.findById(id);
         return ResponseEntity.ok(post);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Post> createPost(@Valid @RequestBody Post post) {
-        Post createdPost = postService.create(post);
+    public ResponseEntity<PostResponse> createPost(@Valid @RequestBody PostRequest request) {
+        PostResponse createdPost = postService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long id, @Valid @RequestBody Post updatedPost) {
-        Post post = postService.update(id, updatedPost);
+    public ResponseEntity<PostResponse> updatePost(@PathVariable Long id, @Valid @RequestBody PostRequest request) {
+        PostResponse post = postService.update(id, request);
         return ResponseEntity.ok(post);
     }
 

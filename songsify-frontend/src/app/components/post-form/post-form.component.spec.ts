@@ -10,7 +10,7 @@ describe('PostFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PostFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(PostFormComponent);
     component = fixture.componentInstance;

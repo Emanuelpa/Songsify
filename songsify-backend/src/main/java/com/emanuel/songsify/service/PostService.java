@@ -1,12 +1,15 @@
 package com.emanuel.songsify.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.emanuel.songsify.dto.PostRequest;
+import com.emanuel.songsify.dto.PostResponse;
 import com.emanuel.songsify.exception.PostNotFoundException;
 import com.emanuel.songsify.model.Post;
 import com.emanuel.songsify.repository.PostRepository;
@@ -21,44 +24,52 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public List<Post> findAll() {
+    public List<PostResponse> findAll() {
         List<Post> posts = postRepository.findAll();
-        return posts;
-    }
+        List<PostResponse> postResponses = new ArrayList<>();
 
-    public Post findById(Long id) {
-        Optional<Post> post = postRepository.findById(id);
-
-        if (post.isPresent()) {
-            return post.get();
-        } else {
-            throw new PostNotFoundException(id);
+        for (Post post : posts) {
+            PostResponse postResponse = toResponse(post);
+            postResponses.add(postResponse);
         }
+
+        return postResponses;
     }
 
-    public Post create(Post post) {
+    public PostResponse findById(Long id) {
+        Post post = getPostOrThrow(id);
+        PostResponse postResponse = toResponse(post);
+        return postResponse;
+    }
+
+    public PostResponse create(PostRequest request) {
+        Post post = new Post();
+        post.setTitle(request.getTitle());
+        post.setAuthor(request.getAuthor());
+        post.setSongName(request.getSongName());
+        post.setSingerName(request.getSingerName());
+        post.setSongUrl(request.getSongUrl());
+        post.setDescription(request.getDescription());
         post.setCreationDate(LocalDateTime.now());
+
         Post savedPost = postRepository.save(post);
-        return savedPost;
+        PostResponse postResponse = toResponse(savedPost);
+        return postResponse;
     }
 
-    public Post update(Long id, Post updatedPost) {
-        Optional<Post> existingPost = postRepository.findById(id);
+    public PostResponse update(Long id, PostRequest request) {
+        Post existingPost = getPostOrThrow(id);
 
-        if (existingPost.isPresent()) {
-            Post post = existingPost.get();
-            post.setTitle(updatedPost.getTitle());
-            post.setAuthor(updatedPost.getAuthor());
-            post.setSongName(updatedPost.getSongName());
-            post.setSingerName(updatedPost.getSingerName());
-            post.setSongUrl(updatedPost.getSongUrl());
-            post.setDescription(updatedPost.getDescription());
+        existingPost.setTitle(request.getTitle());
+        existingPost.setAuthor(request.getAuthor());
+        existingPost.setSongName(request.getSongName());
+        existingPost.setSingerName(request.getSingerName());
+        existingPost.setSongUrl(request.getSongUrl());
+        existingPost.setDescription(request.getDescription());
 
-            Post savedPost = postRepository.save(post);
-            return savedPost;
-        } else {
-            throw new PostNotFoundException(id);
-        }
+        Post savedPost = postRepository.save(existingPost);
+        PostResponse postResponse = toResponse(savedPost);
+        return postResponse;
     }
 
     public void delete(Long id) {
@@ -69,5 +80,28 @@ public class PostService {
         } else {
             throw new PostNotFoundException(id);
         }
+    }
+
+    private Post getPostOrThrow(Long id) {
+        Optional<Post> post = postRepository.findById(id);
+
+        if (post.isPresent()) {
+            return post.get();
+        } else {
+            throw new PostNotFoundException(id);
+        }
+    }
+
+    private PostResponse toResponse(Post post) {
+        PostResponse response = new PostResponse();
+        response.setId(post.getId());
+        response.setTitle(post.getTitle());
+        response.setAuthor(post.getAuthor());
+        response.setSongName(post.getSongName());
+        response.setSingerName(post.getSingerName());
+        response.setSongUrl(post.getSongUrl());
+        response.setDescription(post.getDescription());
+        response.setCreationDate(post.getCreationDate());
+        return response;
     }
 }
