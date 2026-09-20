@@ -51,13 +51,20 @@ src/app/
 - Node.js 20 y npm
 - Angular CLI 18 (opcional — el proyecto ya lo incluye como dependencia; si no lo tienes instalado globalmente, usa `npx ng` en lugar de `ng` en los comandos siguientes)
 
-No necesitas instalar Maven por separado: el proyecto incluye el wrapper `./mvnw`.
+No necesitas instalar Maven por separado: el proyecto incluye el wrapper de Maven.
 
 ## Cómo ejecutar el backend
 
+**Mac / Linux:**
 ```bash
 cd songsify-backend
 ./mvnw spring-boot:run
+```
+
+**Windows (símbolo del sistema o PowerShell):**
+```cmd
+cd songsify-backend
+mvnw.cmd spring-boot:run
 ```
 
 El servidor arranca en `http://localhost:8080`.
@@ -69,6 +76,7 @@ La base de datos H2 es en memoria: se recrea vacía cada vez que se reinicia la 
 ```bash
 ./mvnw test
 ```
+(en Windows: `mvnw.cmd test`)
 
 ## Cómo ejecutar el frontend
 
@@ -80,7 +88,7 @@ npm install
 ng serve
 ```
 
-Si no tienes Angular CLI instalado globalmente:
+Si no tienes Angular CLI instalado globalmente (o el comando `ng` no se reconoce en tu sistema, común en Windows):
 
 ```bash
 npx ng serve
@@ -122,7 +130,7 @@ docker-compose down
 ```json
 {
   "title": "Por qué OK Computer sigue siendo relevante",
-  "author": "Emanuel",
+  "author": "Epv",
   "songName": "Paranoid Android",
   "singerName": "Radiohead",
   "songUrl": "https://open.spotify.com/track/6LgJvl0Xdtc73RJ1mmpotq",
